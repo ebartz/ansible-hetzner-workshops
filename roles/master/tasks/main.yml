@@ -6,3 +6,22 @@
     - python-pip
     - python34
     - git
+
+
+
+- name: build list of users
+  debug:
+    msg: "user{{ item }}"
+  loop: "{{ range(0, hetzner_cluster_count)|list }}"
+  register: usernames
+
+- set_fact:
+    usernames: "{{ usernames.results | map(attribute='msg') | list }}"
+
+- name: Add user accounts
+  user:
+    name: "{{ item }}"
+    shell: /bin/bash
+    state: present
+    password: "{{ upassword | password_hash('sha512') }}"
+  with_items: "{{ usernames  }}" 

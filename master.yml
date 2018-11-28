@@ -1,6 +1,7 @@
 ---
 - hosts: ultramaster
+  vars_files:
+    - group_vars/servers.yml
   remote_user: root
-  strategy: free
   roles:
-    - ultramaster
+    - master
