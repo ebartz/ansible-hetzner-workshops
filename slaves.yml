@@ -1,0 +1,7 @@
+---
+- hosts: kube*
+  vars_files:
+    - group_vars/servers.yml
+  remote_user: root
+  roles:
+    - slaves

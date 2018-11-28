@@ -7,8 +7,6 @@
     - python34
     - git
 
-
-
 - name: build list of users
   debug:
     msg: "user{{ item }}"
@@ -25,3 +23,19 @@
     state: present
     password: "{{ upassword | password_hash('sha512') }}"
   with_items: "{{ usernames  }}" 
+
+- name: Insert custom fact file for fqdn
+  copy:
+    src: facts/ultramaster_user_keys.fact
+    dest: /etc/ansible/facts.d/ultramaster_user_keys.fact
+    mode: 0755
+    force: yes
+
+- name: create ssh-keys
+  shell: "sudo -u {{ item }} ssh-keygen -q -f /home/{{ item }}/.ssh/id_rsa  -C '' -N ''"
+  args:
+    creates: "/home/{{ item }}/.ssh/id_rsa"
+  with_items: "{{ usernames  }}"
+
+- name: Refresh inventory
+  meta: refresh_inventory

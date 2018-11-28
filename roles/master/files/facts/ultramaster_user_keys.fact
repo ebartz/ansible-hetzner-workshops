@@ -1,0 +1,6 @@
+#!/bin/bash
+
+for user in $(find /home/ -type d -name 'user*' | cut -d/ -f 3)
+do
+  echo "{\"ultramaster_user_keys_${user}\" : \"$(cat /home/${user}/.ssh/id_rsa.pub)\"}"
+done
