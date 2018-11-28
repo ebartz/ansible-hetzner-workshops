@@ -1,0 +1,2 @@
+#!/bin/bash
+echo "{\"real_ansible_fqdn\" : \"$(hostname -f)\"}"

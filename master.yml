@@ -1,0 +1,6 @@
+---
+- hosts: ultramaster
+  remote_user: root
+  strategy: free
+  roles:
+    - ultramaster

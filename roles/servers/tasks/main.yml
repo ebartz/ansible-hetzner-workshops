@@ -1,0 +1,73 @@
+---
+- name: build list of clusters
+  debug:
+    msg: "kube{{ item }}"
+  loop: "{{ range(0, hetzner_cluster_count)|list }}"
+  register: clusternames
+
+- set_fact:
+    clusternames: "{{ clusternames.results | map(attribute='msg') | list }}"
+
+- name: build list of workers
+  debug:
+    msg: "-worker-{{ item }}"
+  loop: "{{ range(0, hetzner_worker_count)|list }}"
+  register: clusterworkers
+
+- set_fact:
+    clusterworkers: "{{ clusterworkers.results | map(attribute='msg') | list }}"
+
+- name: build list of workernames
+  debug:
+    msg: "{{ item }}"
+  loop: "{{ clusternames | product(clusterworkers) | list }}"
+  register: workernames
+
+- set_fact:
+    workernames: "{{ workernames.results | map(attribute='msg') | list }}"
+
+
+- name: "workers"
+  debug:
+    msg: "{{item.0}}{{item.1}}"
+  loop: "{{ workernames  }}"
+  register: workernameslist
+
+- set_fact:
+    workernameslist: "{{ workernameslist.results | map(attribute='msg') | list }}"
+
+
+- name: build list of masters
+  debug:
+    msg: "kube{{ item }}-master"
+  loop: "{{ range(0, hetzner_cluster_count)|list }}"
+  register: clustermasters
+
+
+- set_fact:
+    clustermasters: "{{ clustermasters.results | map(attribute='msg') | list }}"
+
+- set_fact: 
+    ultramaster:
+      - "ultramaster"
+
+- name:
+  debug:
+    msg: "{{ clustermasters + workernameslist + ultramaster }}"
+
+- module_defaults:
+    hcloud_server:
+      token: "{{ lookup('env','HCLOUD_TOKEN') | default(hetzner_token, true) }}"
+      image: "{{ hetzner_instance_os }}"
+      server_type: "{{ hetzner_instance_type }}"
+      datacenter: "{{ hetzner_datacenter }}"
+      ssh_keys: "{{ hetzner_ssh_keys }}"
+  block:
+    - hcloud_server:
+        name: "{{ clustermasters + workernameslist + ultramaster}}"
+
+- pause:
+    seconds: 60
+
+- name: Refresh inventory
+  meta: refresh_inventory
