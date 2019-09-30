@@ -1,2 +1,20 @@
 ---
+- name: Insert custom fact file for slave_number
+  copy:
+    src: facts/slave_number.fact
+    dest: /etc/ansible/facts.d/slave_number.fact
+    mode: 0755
+    force: yes
+
+- name: Refresh inventory
+  meta: refresh_inventory
+
 - name: create authorized_keys_file
+  copy:
+    content: "{{ hostvars['ultramaster']['ansible_local']['ultramaster_user_keys']}}"
+    dest: /tmp/key
+    mode: 0700
+    force: yes
+
+- name: Choose right key
+  shell: "cat /tmp/key  | jq -r .ultramaster_user_keys_user$(hostname | cut -d'-' -f1 | cut -d'e' -f 2) >> /root/.ssh/authorized_keys && rm /tmp/key"

@@ -1,0 +1,2 @@
+#!/bin/bash
+echo "{\"slave_number\" : \"$(hostname | cut -d'-' -f1 | cut -d'e' -f 2)\"}"

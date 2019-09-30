@@ -24,7 +24,7 @@
     password: "{{ upassword | password_hash('sha512') }}"
   with_items: "{{ usernames  }}" 
 
-- name: Insert custom fact file for fqdn
+- name: Insert custom fact file for ultramaster_keys
   copy:
     src: facts/ultramaster_user_keys.fact
     dest: /etc/ansible/facts.d/ultramaster_user_keys.fact

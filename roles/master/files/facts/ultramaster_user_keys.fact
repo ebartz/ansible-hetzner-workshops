@@ -1,6 +1,10 @@
 #!/bin/bash
-
+rm /tmp/keys_ultramaster.json
+touch /tmp/keys_ultramaster.json
 for user in $(find /home/ -type d -name 'user*' | cut -d/ -f 3)
 do
-  echo "{\"ultramaster_user_keys_${user}\" : \"$(cat /home/${user}/.ssh/id_rsa.pub)\"}"
+  echo "\"ultramaster_user_keys_${user}\" : \"$(cat /home/${user}/.ssh/id_rsa.pub)\"," >> /tmp/keys_ultramaster.json
 done
+
+echo '{' $(sed '$s/,$//' /tmp/keys_ultramaster.json) '}'
+rm /tmp/keys_ultramaster.json
