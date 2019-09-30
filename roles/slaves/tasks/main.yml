@@ -18,3 +18,11 @@
 
 - name: Choose right key
   shell: "cat /tmp/key  | jq -r .ultramaster_user_keys_user$(hostname | cut -d'-' -f1 | cut -d'e' -f 2) >> /root/.ssh/authorized_keys && rm /tmp/key"
+
+- name: install Docker
+  shell: 'curl https://releases.rancher.com/install-docker/18.09.sh | sh'
+
+- name: Install iscsi-initiator-utils
+  yum:
+    state: present
+    name: iscsi-initiator-utils
