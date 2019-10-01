@@ -31,6 +31,13 @@
     mode: 0755
     force: yes
 
+- name: Place Host list script
+  copy:
+    src: host_list
+    dest: /usr/local/bin/host_list
+    mode: 0755
+    force: yes
+
 - name: create ssh-keys
   shell: "sudo -u {{ item }} ssh-keygen -q -f /home/{{ item }}/.ssh/id_rsa  -C '' -N ''"
   args:

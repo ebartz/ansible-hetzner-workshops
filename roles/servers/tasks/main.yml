@@ -67,7 +67,7 @@
         name: "{{ clustermasters + workernameslist + ultramaster}}"
 
 - pause:
-    seconds: 60
+    seconds: 120
 
 - name: Refresh inventory
   meta: refresh_inventory
