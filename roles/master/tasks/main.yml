@@ -38,6 +38,30 @@
     mode: 0755
     force: yes
 
+ name: Place lesson_1
+  copy:
+    src: lesson_1
+    dest: /tmp/1
+    mode: 0644
+    user: root
+    force: yes
+
+ name: Place lesson_2
+  copy:
+    src: lesson_2
+    dest: /tmp/2
+    mode: 0644
+    user: root
+    force: yes
+
+ name: Place lesson_3
+  copy:
+    src: lesson_3
+    dest: /tmp/3
+    mode: 0644
+    user: root
+    force: yes
+
 - name: create ssh-keys
   shell: "sudo -u {{ item }} ssh-keygen -q -f /home/{{ item }}/.ssh/id_rsa  -C '' -N ''"
   args:
