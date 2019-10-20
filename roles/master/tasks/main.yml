@@ -38,28 +38,28 @@
     mode: 0755
     force: yes
 
- name: Place lesson_1
+- name: Place lesson_1
   copy:
     src: lesson_1
     dest: /tmp/1
     mode: 0644
-    user: root
+    owner: root
     force: yes
 
- name: Place lesson_2
+- name: Place lesson_2
   copy:
     src: lesson_2
     dest: /tmp/2
     mode: 0644
-    user: root
+    owner: root
     force: yes
 
- name: Place lesson_3
+- name: Place lesson_3
   copy:
     src: lesson_3
     dest: /tmp/3
     mode: 0644
-    user: root
+    owner: root
     force: yes
 
 - name: create ssh-keys
