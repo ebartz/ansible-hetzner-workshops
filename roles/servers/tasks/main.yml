@@ -62,6 +62,7 @@
       server_type: "{{ hetzner_instance_type }}"
       datacenter: "{{ hetzner_datacenter }}"
       ssh_keys: "{{ hetzner_ssh_keys }}"
+      state: "present"
   block:
     - hcloud_server:
         name: "{{ clustermasters + workernameslist + ultramaster}}"
