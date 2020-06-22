@@ -68,5 +68,25 @@
     creates: "/home/{{ item }}/.ssh/id_rsa"
   with_items: "{{ usernames  }}"
 
+- name: install nodejs
+  shell: "curl --silent --location https://rpm.nodesource.com/setup_8.x | sudo bash -"    
+- name: install yarn repo
+  shell: "curl -sL https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yum.repos.d/yarn.repo"    
+- name: install yarn
+  yum:
+    name: yarn
+    state: present    
+
+- name: install the 'Development tools' package group
+  yum:
+    name: "@Development tools"
+    state: present
+
+- name: Install wetty node.js package globally.
+  yarn:
+    name: wetty
+    global: yes
+
 - name: Refresh inventory
   meta: refresh_inventory
+
