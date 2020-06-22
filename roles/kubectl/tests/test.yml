@@ -1,7 +1,5 @@
 ---
-- hosts: all
+- hosts: localhost
   remote_user: root
-  strategy: free
   roles:
-    - common
     - kubectl

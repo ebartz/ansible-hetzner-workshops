@@ -14,6 +14,7 @@
     - rsync
     - mlocate
     - telnet
+    - nano
 
 - name: Install additional packages
   yum: state=present name={{ item }}
