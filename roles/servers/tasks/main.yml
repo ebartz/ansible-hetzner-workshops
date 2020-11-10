@@ -57,15 +57,16 @@
 
 - module_defaults:
     hcloud_server:
-      token: "{{ lookup('env','HCLOUD_TOKEN') | default(hetzner_token, true) }}"
+      api_token: "{{ lookup('env','HCLOUD_TOKEN') | default(hetzner_token, true) }}"
       image: "{{ hetzner_instance_os }}"
       server_type: "{{ hetzner_instance_type }}"
       datacenter: "{{ hetzner_datacenter }}"
       ssh_keys: "{{ hetzner_ssh_keys }}"
       state: "present"
   block:
-    - hcloud_server:
-        name: "{{ clustermasters + workernameslist + ultramaster}}"
+    - loop: "{{clustermasters + workernameslist + ultramaster}}"
+      hcloud_server:
+        name: "{{ item }}"    
 
 - pause:
     seconds: 120
