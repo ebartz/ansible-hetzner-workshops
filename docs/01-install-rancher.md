@@ -8,9 +8,9 @@ docker run -d --restart=unless-stopped \
   --acme-domain rancher-$ID.sva.rocks
 ```
 
-Danach auf `https://rancher-$ID.sva.rocks` um das Passwort zu setzen:
+Danach auf `https://rancher-$ID.sva.rocks` um das Passwort sowie erste Einstellungen zu setzen:
 
- ![](2020-11-10-21-47-13.png)
+![](2020-11-10-22-52-31.png)
 
 Danach muss die URL für den Cluster gesetzt werden. Das sollte automatisch richtig gesetzt sein:
 
