@@ -69,7 +69,7 @@
   with_items: "{{ usernames  }}"
 
 - name: install nodejs
-  shell: "curl --silent --location https://rpm.nodesource.com/setup_8.x | sudo bash -"    
+  shell: "curl --silent --location https://rpm.nodesource.com/setup_14.x | sudo bash -"    
 - name: install yarn repo
   shell: "curl -sL https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yum.repos.d/yarn.repo"    
 - name: install yarn

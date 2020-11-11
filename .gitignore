@@ -26,3 +26,4 @@ Thumbs.db
 # Test-Line
 #
 group_vars/servers.yml
+host_list
