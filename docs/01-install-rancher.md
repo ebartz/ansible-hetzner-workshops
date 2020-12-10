@@ -1,5 +1,11 @@
 # Aufgabe 1 - Rancher installieren
 Ausrollen des Rancher Containers auf dem Master-Server: kube$ID-master
+
+```
+[user0@ultramaster ~]$ ssh kube0-master
+```
+
+Danach muss auf deinem Master Server der Rancher Container gestartet werden:
 ```
 docker run -d --restart=unless-stopped \
   -p 80:80 -p 443:443 \
