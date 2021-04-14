@@ -43,7 +43,7 @@ Anschließend bekommen wir die Möglichkeit Kommandos für das Hinzufügen von C
 Dabei ist zu unterscheiden, dass es Master und Worker Nodes gibt.
 Unser Cluster besteht aus einem Master und 3 Workern.
 
-**Master**: `kube-$ID-master`
+**Master**: `kube$ID-master`
 
 Für den Master wählt ihr etcd und Control Plane als Rolle aus und kopiert den Befehl:
 
@@ -55,7 +55,7 @@ Danach geht es vom “ultramaster” aus via SSH zu eurem Master und führt dort
 
 Mit einem exit könnt ihr nun die SSH Verbindung zu eurem Master beenden und kommt wieder zurück zum “ultramaster”.
 
-**Worker**: `kube-$ID-worker-0`; `kube-$ID-worker-1`;  `kube-$ID-worker-2`
+**Worker**: `kube$ID-worker-0`; `kube$ID-worker-1`;  `kube$ID-worker-2`
 
 Für eure Worker wählt ihr lediglich die Rolle Worker:
 
